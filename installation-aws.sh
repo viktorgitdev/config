@@ -33,29 +33,24 @@ sudo chmod 777 /opt/dremio/conf/core-site.xml
 echo '<?xml version="1.0"?>'>>/opt/dremio/conf/core-site.xml
 echo '<configuration>'>>/opt/dremio/conf/core-site.xml
 echo '    <property>'>>/opt/dremio/conf/core-site.xml
-echo '        <name>fs.dremioAzureStorage.impl</name>'>>/opt/dremio/conf/core-site.xml
-echo '        <description>The FileSystem implementation. Must always be com.dremio.plugins.azure.AzureStorageFileSystem</description>'>>/opt/dremio/conf/core-site.xml
-echo '        <value>com.dremio.plugins.azure.AzureStorageFileSystem</value>'>>/opt/dremio/conf/core-site.xml
+echo '        <name>fs.dremioS3.impl</name>'>>/opt/dremio/conf/core-site.xml
+echo '        <description>The FileSystem implementation. Must be set to com.dremio.plugins.s3.store.S3FileSystem</description>'>>/opt/dremio/conf/core-site.xml
+echo '        <value>com.dremio.plugins.s3.store.S3FileSystem</value>'>>/opt/dremio/conf/core-site.xml
 echo '    </property>'>>/opt/dremio/conf/core-site.xml
 echo '    <property>'>>/opt/dremio/conf/core-site.xml
-echo '        <name>dremio.azure.account</name>'>>/opt/dremio/conf/core-site.xml
-echo '        <description>The shared access key for the storage account.</description>'>>/opt/dremio/conf/core-site.xml
+echo '        <name>fs.s3a.access.key</name>'>>/opt/dremio/conf/core-site.xml
+echo '        <description>AWS access key ID.</description>'>>/opt/dremio/conf/core-site.xml
 echo '        <value>ACCESSKEY</value>'>>/opt/dremio/conf/core-site.xml
 echo '    </property>'>>/opt/dremio/conf/core-site.xml
 echo '    <property>'>>/opt/dremio/conf/core-site.xml
-echo '        <name>dremio.azure.key</name>'>>/opt/dremio/conf/core-site.xml
-echo '        <description>The shared access key for the storage account.</description>'>>/opt/dremio/conf/core-site.xml
+echo '        <name>fs.s3a.secret.key</name>'>>/opt/dremio/conf/core-site.xml
+echo '        <description>AWS secret key.</description>'>>/opt/dremio/conf/core-site.xml
 echo '        <value>SECRETKEY</value>'>>/opt/dremio/conf/core-site.xml
 echo '    </property>'>>/opt/dremio/conf/core-site.xml
 echo '    <property>'>>/opt/dremio/conf/core-site.xml
-echo '        <name>dremio.azure.mode</name>'>>/opt/dremio/conf/core-site.xml
-echo '        <description>The storage account type. Value: STORAGE_V2</description>'>>/opt/dremio/conf/core-site.xml
-echo '        <value>STORAGE_V2</value>'>>/opt/dremio/conf/core-site.xml
-echo '    </property>'>>/opt/dremio/conf/core-site.xml
-echo '    <property>'>>/opt/dremio/conf/core-site.xml
-echo '        <name>dremio.azure.secure</name>'>>/opt/dremio/conf/core-site.xml
-echo '        <description>Boolean option to enable SSL connections. Default: True Value: True/False</description>'>>/opt/dremio/conf/core-site.xml
-echo '        <value>True</value>'>>/opt/dremio/conf/core-site.xml
+echo '        <name>fs.s3a.aws.credentials.provider</name>'>>/opt/dremio/conf/core-site.xml
+echo '        <description>The credential provider type.</description>'>>/opt/dremio/conf/core-site.xml
+echo '        <value>org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider</value>'>>/opt/dremio/conf/core-site.xml
 echo '    </property>'>>/opt/dremio/conf/core-site.xml
 echo '</configuration>'>>/opt/dremio/conf/core-site.xml
 sudo sed -i "s/ACCESSKEY/$DREMIO_BUCKET_KEY/g" /opt/dremio/conf/core-site.xml
