@@ -4,7 +4,7 @@ export DREMIO_LINK=$3
 export DREMIO_BUCKET_KEY=$4 
 export DREMIO_SECRET=$5
 export DDREMIO_BUCKET_PATH=$6
-if [ $DREMIO_TYPE = "executor"]; then 
+if [ $DREMIO_TYPE = "executor" ]; then 
     export DREMIO_IPZK=$7 
 fi
 export DREMIO_MEMORY_DIRECT=`free -m | awk '/Mem:/ {print $2}'  | awk '{ if ($1>=32000) print $1-8129-2048; else if ( $1>=16000 ) print $1-2048-4096; else if ( $1>=4096 ) print 1024; else print int($1/4)}'`
@@ -17,7 +17,7 @@ sudo sed -i "s/.*DREMIO_MAX_HEAP_MEMORY_SIZE_MB.*/DREMIO_MAX_HEAP_MEMORY_SIZE_MB
 #dremio.conf
 sudo sed -i "s#.*local:.*#local: \"/data/$DREMIO_CLUSTER_NAME\"#g" /opt/dremio/conf/dremio.conf
 sudo sed -i "/local:/a \ \ dist: \"$DDREMIO_BUCKET_PATH\"" /opt/dremio/conf/dremio.conf
-if [ $DREMIO_TYPE = "executor"]; then 
+if [ $DREMIO_TYPE = "executor" ]; then 
     sudo sed -i "s/.*coordinator.enabled.*/coordinator.enabled: false,/g" /opt/dremio/conf/dremio.conf
     sudo sed -i "s/.*coordinator.master.enabled.*/coordinator.master.enabled: false,/g" /opt/dremio/conf/dremio.conf
     sudo sed -i -e '$azookeeper: "IPZK"' /opt/dremio/conf/dremio.conf   
