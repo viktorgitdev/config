@@ -1,4 +1,3 @@
-#!bash
 export DREMIO_TYPE=$1
 export DREMIO_CLUSTER_NAME=$2
 export DREMIO_LINK=$3 
