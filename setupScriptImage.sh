@@ -8,7 +8,6 @@ export DREMIO_CLUSTER=$7
 export DREMIO_MEMORY_DIRECT=`free -m | awk '/Mem:/ {print $2}'  | awk '{ if ($1>=32000) print $1-8129-2048; else if ( $1>=16000 ) print $1-2048-4096; else if ( $1>=4096 ) print 1024; else print int($1/4)}'`
 export DREMIO_MEMORY_HEAP=`free -m | awk '/Mem:/ {print $2}'  | awk '{ if ($1>=32000) print 8129; else if ( $1>=16000 ) print 4096; else if ( $1>=4096 ) print 2048; else print int($1/4) }'`
 sudo mkdir -p /data/$DREMIO_CLUSTER && chmod -R 777 /data
-sudo yum update -y && sudo yum install -y java-1.8.0-openjdk
 sudo sed -i "s#.*local:.*#local: \"/data/$DREMIO_CLUSTER\"#g" /opt/dremio/conf/dremio.conf
 sudo sed -i "s/.*DREMIO_MAX_DIRECT_MEMORY_SIZE_MB.*/DREMIO_MAX_DIRECT_MEMORY_SIZE_MB=$DREMIO_MEMORY_DIRECT/g" /opt/dremio/conf/dremio-env
 sudo sed -i "s/.*DREMIO_MAX_HEAP_MEMORY_SIZE_MB.*/DREMIO_MAX_HEAP_MEMORY_SIZE_MB=$DREMIO_MEMORY_HEAP/g" /opt/dremio/conf/dremio-env
