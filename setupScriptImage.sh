@@ -1,10 +1,9 @@
 export DREMIO_TYPE=$1
 export DREMIO_BUCKET_KEY=$2 
 export DREMIO_SECRET=$3 
-export DREMIO_IPZK=$4
-export DREMIO_VERSION=$5 
-export DREMIO_BUCKET=$6
-export DREMIO_CLUSTER=$7 
+export DREMIO_IPZK=$4 
+export DREMIO_BUCKET=$5
+export DREMIO_CLUSTER=$6 
 export DREMIO_MEMORY_DIRECT=`free -m | awk '/Mem:/ {print $2}'  | awk '{ if ($1>=32000) print $1-8129-2048; else if ( $1>=16000 ) print $1-2048-4096; else if ( $1>=4096 ) print 1024; else print int($1/4)}'`
 export DREMIO_MEMORY_HEAP=`free -m | awk '/Mem:/ {print $2}'  | awk '{ if ($1>=32000) print 8129; else if ( $1>=16000 ) print 4096; else if ( $1>=4096 ) print 2048; else print int($1/4) }'`
 sudo mkdir -p /data/$DREMIO_CLUSTER && chmod -R 777 /data
