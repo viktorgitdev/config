@@ -4,6 +4,7 @@ export DREMIO_SECRET=$3
 export DREMIO_IPZK=$4 
 export DREMIO_BUCKET=$5
 export DREMIO_CLUSTER=$6 
+export DREMIO_ENGINE=$7
 export DREMIO_MEMORY_DIRECT=`free -m | awk '/Mem:/ {print $2}'  | awk '{ if ($1>=32000) print $1-8129-2048; else if ( $1>=16000 ) print $1-2048-4096; else if ( $1>=4096 ) print 1024; else print int($1/4)}'`
 export DREMIO_MEMORY_HEAP=`free -m | awk '/Mem:/ {print $2}'  | awk '{ if ($1>=32000) print 8129; else if ( $1>=16000 ) print 4096; else if ( $1>=4096 ) print 2048; else print int($1/4) }'`
 sudo mkdir -p /data/$DREMIO_CLUSTER && chmod -R 777 /data
@@ -13,6 +14,7 @@ sudo sed -i "s/.*DREMIO_MAX_HEAP_MEMORY_SIZE_MB.*/DREMIO_MAX_HEAP_MEMORY_SIZE_MB
 sudo sed -i "s/.*coordinator.enabled.*/coordinator.enabled: false,/g" /opt/dremio/conf/dremio.conf
 sudo sed -i "s/.*coordinator.master.enabled.*/coordinator.master.enabled: false,/g" /opt/dremio/conf/dremio.conf
 sudo sed -i "/local:/a \ \ dist: \"$DREMIO_BUCKET\"" /opt/dremio/conf/dremio.conf
+sudo sed -i "/services:/a \ \ node-tag:\"$DREMIO_ENGINE\"" /opt/dremio/conf/dremio.conf
 sudo sed -i -e '$azookeeper: "IPZK"' /opt/dremio/conf/dremio.conf
 sudo sed -i "s#IPZK#$DREMIO_IPZK#g" /opt/dremio/conf/dremio.conf
 sudo touch /opt/dremio/conf/core-site.xml
