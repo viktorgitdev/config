@@ -16,7 +16,7 @@ sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_
 ```
 wget https://raw.githubusercontent.com/viktordremio/config/master/installation-universal.sh
 chmod +x installation-universal.sh
-sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" aws "<COORDINATOR_IP>:2181"
+sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" aws <COORDINATOR_IP>:2181
 ```
 
 
@@ -43,6 +43,6 @@ sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <CONTAIN
 ```
 wget https://raw.githubusercontent.com/viktordremio/config/master/installation-universal.sh
 chmod +x installation-universal.sh
-sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <CONTAINER_NAME> <SECRET_KEY> "dremioAzureStorage://:///<CONTAINER>/<FOLDER>" azure "<COORDINATOR_IP>:2181"
+sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <CONTAINER_NAME> <SECRET_KEY> "dremioAzureStorage://:///<CONTAINER>/<FOLDER>" azure <COORDINATOR_IP>:2181
 ```
 
