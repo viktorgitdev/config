@@ -1,12 +1,48 @@
-**HowTo run installation on EC2** 
-1. Create S3 bucket and folder in it
+**HowTo** 
+
+_AWS_
+
+1. Create S3 bucket and folder in it. Replace <VARIABLE_S>
 
 2. Install master/coordinator
-wget https://raw.githubusercontent.com/viktordremio/config/master/installation-aws.sh
-chmod +x installation-aws.sh
-sudo ./installation-aws.sh master NAME_OF_CLUSTER link-to-rmp> ACCESS_KEY SECRET_KEY "dremioS3:///BUCKET-NAME/FODLER" 
+```
+wget https://raw.githubusercontent.com/viktordremio/config/master/installation-universal.sh
+chmod +x installation-universal.sh
+sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" aws
+```
+
+
+1.  Install executor
+```
+wget https://raw.githubusercontent.com/viktordremio/config/master/installation-universal.sh
+chmod +x installation-universal.sh
+sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" aws <COORDINATOR_IP>
+```
+
+
+
+
+
+_AZURE_
+
+1. Create ADLSG2 starage, conatiner and folder. Replace <VARIABLE_S>
+
+2. Install master/coordinator 
+
+
+
+```
+wget https://raw.githubusercontent.com/viktordremio/config/master/installation-universal.sh
+chmod +x installation-universal.sh
+sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <CONTAINER_NAME> <SECRET_KEY> "dremioAzureStorage://:///<CONTAINER>/<FOLDER>" azure
+```
 
 3.  Install executor
-wget https://raw.githubusercontent.com/viktordremio/config/master/installation-aws.sh
-chmod +x installation-aws.sh
-sudo ./installation-aws.sh executor NAME_OF_CLUSTER link-to-rmp> ACCESS_KEY SECRET_KEY "dremioS3:///BUCKET-NAME/FODLER" COORDINATOR_IP
+
+
+```
+wget https://raw.githubusercontent.com/viktordremio/config/master/installation-universal.sh
+chmod +x installation-universal.sh
+sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <CONTAINER_NAME> <SECRET_KEY> "dremioAzureStorage://:///<CONTAINER>/<FOLDER>" azure <COORDINATOR_IP>
+```
+
