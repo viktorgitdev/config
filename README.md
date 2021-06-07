@@ -11,8 +11,6 @@ chmod +x installation-universal.sh
 sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" aws
 
 
-#alternative azure
-sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <ACCOUNTNAME> <SECRET_KEY> "dremioAzureStorage://:///<FILE_SYSTEM_NAME>/<ALTERNATIVE_STORAGE_ROOT_DIRECTORY>" azure
 ```
 
 
@@ -23,8 +21,6 @@ chmod +x installation-universal.sh
 sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" aws <COORDINATOR_IP>:2181
 
 
-#alternativ 
-sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <ACCOUNTNAME> <SECRET_KEY> "dremioAzureStorage://:///<FILE_SYSTEM_NAME>/<ALTERNATIVE_STORAGE_ROOT_DIRECTORY>" azure <COORDINATOR_IP>:2181
 ```
 
 
