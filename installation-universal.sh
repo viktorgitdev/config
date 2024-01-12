@@ -5,8 +5,9 @@ export DREMIO_BUCKET_KEY=$4
 export DREMIO_SECRET=$5
 export DREMIO_BUCKET_PATH=$6
 export DREMIO_DIST_TYPE=$7
+export DREMIO_S3_PREM_ENDPOINT=$8
 if [ $DREMIO_TYPE == "executor" ]; then 
-    export DREMIO_IPZK=$8 
+    export DREMIO_IPZK=$9 
 fi
 
 export DREMIO_MEMORY_DIRECT=`free -m | awk '/Mem:/ {print $2}'  | awk '{ if ($1>=32000) print $1-8129-2048; else if ( $1>=16000 ) print $1-2048-4096; else if ( $1>=4096 ) print 1024; else print int($1/4)}'`
@@ -92,8 +93,58 @@ cat > /opt/dremio/conf/core-site.xml <<EOF
 EOF
 }
 
+function write_coresite_xml_s3 {
+cat > /opt/dremio/conf/core-site.xml <<EOF
+<?xml version="1.0"?>
+ <configuration>
+    <property>
+        <name>fs.dremioS3.impl</name>
+        <description>The FileSystem implementation. Must be set to com.dremio.plugins.s3.store.S3FileSystem</description>
+        <value>com.dremio.plugins.s3.store.S3FileSystem</value>
+    </property>
+    <property>
+        <name>fs.s3a.access.key</name>
+        <description>AWS access key ID.</description>
+        <value>DREMIO_BUCKET_KEY</value>
+    </property>
+    <property>
+        <name>fs.s3a.secret.key</name>
+        <description>AWS secret key.</description>
+        <value>DREMIO_SECRET</value>
+    </property>
+    <property>
+        <name>fs.s3a.aws.credentials.provider</name>
+        <description>The credential provider type.</description>
+        <value>org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider</value>
+    </property>
+    <property>
+        <name>fs.s3a.endpoint</name>
+        <description>Endpoint can either be an IP or a hostname, where Minio server is running . However the endpoint value cannot contain the http(s) prefix. E.g. 175.1.2.3:9000 is a valid endpoint. </description>
+        <value>DREMIO_S3_PREM_ENDPOINT</value>
+    </property>
+    <property>
+        <name>fs.s3a.path.style.access</name>
+        <description>Value has to be set to true.</description>
+        <value>true</value>
+    </property>
+    <property>
+        <name>dremio.s3.compat</name>
+        <description>Value has to be set to true.</description>
+        <value>true</value>
+    </property>
+    <property>
+        <name>fs.s3a.connection.ssl.enabled</name>
+        <description>Value can either be true or false, set to true to use SSL with a secure Minio server.</description>
+        <value>SSL_ENABLED</value>
+    </property>
+ </configuration>
+EOF
+}
+
 if [ $DREMIO_DIST_TYPE == "aws" ]; then 
      write_coresite_xml_aws
+elif [ $DREMIO_DIST_TYPE == "s3" ]; then 
+     write_coresite_xml_s3
 else 
      write_coresite_xml_azure     
 fi

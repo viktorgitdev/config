@@ -53,7 +53,7 @@ _S3_onPrem_
 ```
 wget https://raw.githubusercontent.com/viktordremio/config/master/installation-universal.sh
 chmod +x installation-universal.sh
-sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" s3
+sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" s3 <DREMIO_S3_PREM_ENDPOINT>
 
 
 ```
@@ -63,7 +63,7 @@ sudo ./installation-universal.sh master <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_
 ```
 wget https://raw.githubusercontent.com/viktordremio/config/master/installation-universal.sh
 chmod +x installation-universal.sh
-sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" s3 <COORDINATOR_IP>:2181
+sudo ./installation-universal.sh executor <NAME_OF_CLUSTER> <link-to-rmp> <ACCESS_KEY> <SECRET_KEY> "dremioS3:///BUCKET-NAME/FOLDER" s3 <DREMIO_S3_PREM_ENDPOINT> <COORDINATOR_IP>:2181
 
 
 ```
