@@ -153,6 +153,7 @@ sudo touch /opt/dremio/conf/core-site.xml
 sudo chmod 777 /opt/dremio/conf/core-site.xml
 sudo sed -i "s/DREMIO_BUCKET_KEY/$DREMIO_BUCKET_KEY/g" /opt/dremio/conf/core-site.xml
 sudo sed -i "s#DREMIO_SECRET#$DREMIO_SECRET#g" /opt/dremio/conf/core-site.xml
+sudo sed -i "s#DREMIO_S3_PREM_ENDPOINT#$DREMIO_S3_PREM_ENDPOINT#g" /opt/dremio/conf/core-site.xml
 
 #service
 sudo cp /opt/dremio/share/dremio/dremio.service /etc/systemd/system
